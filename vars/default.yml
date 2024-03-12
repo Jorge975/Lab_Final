@@ -1,0 +1,4 @@
+---
+mysql_root_password: "root"
+app_user: "root"
+disable_default: true

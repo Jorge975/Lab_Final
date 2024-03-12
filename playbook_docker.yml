@@ -1,0 +1,25 @@
+---
+- name: Deploy Docker Image
+  hosts: web_servers
+  become: true
+
+  tasks:
+    - name: Pull the new Docker image
+      docker_image:
+        name: miimagen:latest  
+        source: pull
+
+    - name: Stop and remove existing Docker container
+      docker_container:
+        name: micontenedor
+        state: stopped
+        remove: yes
+      ignore_errors: yes
+
+    - name: Run the new Docker container
+      docker_container:
+        name: micontenedor
+        image: your_docker_image:latest  
+        ports:
+          - "5000:5000"  
+        restart_policy: always
