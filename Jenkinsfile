@@ -1,5 +1,6 @@
 pipeline {
 	agent any
+	environment { DOCKERHUB_CREDENTIALS = credentials('jorge-dockerhub')}
 	stages {
 		stage('Checkout') {
 			parallel {
@@ -32,9 +33,6 @@ pipeline {
 					}
 				}
 			}
-		}
-		environment {
-			DOCKERHUB_CREDENTIALS = credentials('jorge-dockerhub')
 		}
 		stage('Build Image') {
 			agent any
