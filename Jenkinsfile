@@ -7,39 +7,42 @@ pipeline {
 					agent {
 						docker { image '3.12-slim' }
 					}
-					steps {
-                        dir('reto_final_python') {
-                            sh """
-								echo 'Image installed:' python --version
-								echo 'Installation Dates...'
-								pip install -r requirements.txt -r requirements_venv.txt
-								"""
-                        }
-						
-					}
-				}
-				stage('Validation tests and coverage') {
-					steps {
-						dir('reto_final_python') {
-                            sh """ 
-								pytest --cov=tests --cov=app
-								coverage report -m
-								"""
-                        }
-					}
-				}
-				stage('Linting'){
-					steps {
-						dir('reto_final_python') {
-							sh 'flake8'
+					stages {
+						stage('Install requirements'){
+							steps {
+                        		dir('reto_final_python') {
+									sh """
+										echo 'Image installed:' python --version
+										echo 'Installation Dates...'
+										pip install -r requirements.txt -r requirements_venv.txt
+										"""
+								}
+							}
 						}
-					}
-				}
-				stage('Build Image') {
-					agent any
-					steps {
-						dir('reto_final_python') {
-							sh 'docker build -t mi_image -f Dockerfile .'
+						stage('Validation tests and coverage') {
+							steps {
+								dir('reto_final_python') {
+                            		sh """ 
+										pytest --cov=tests --cov=app
+										coverage report -m
+										"""
+                        		}
+							}
+						}
+						stage('Linting'){
+							steps {
+								dir('reto_final_python') {
+									sh 'flake8'
+								}
+							}
+						}
+						stage('Build Image') {
+							agent any
+							steps {
+								dir('reto_final_python') {
+									sh 'docker build -t mi_image -f Dockerfile .'
+								}	
+							}
 						}
 					}
 				}
