@@ -11,12 +11,12 @@
 - pip install virtualenv
 - sudo pip3 install virtualenv
 # Instalar requirements.txt, para obtener todos los modulos:
-- pip install -r requirements.txt
+- pip install -r requirements_venv.txt
 # También puedes crear el enviroment directamente en visual studio.
 
 --------------------------------------------------------------------
 
----# INSTALAR MYSQL CON DOCKER-COMPOSE
+---# CREAR ENTORNO DE DESARROLLO LOCAL + MYSQL
 
 # Crear el contenedor con docker-compose
 - docker-compose up
@@ -58,14 +58,13 @@ FLUSH PRIVILEGES;
 
 -----------------------------------------------------------------------
 --# Para conectarse con GitHub
-https://github.com/Jorge975/Final_Lab.git
+-git remote add origin https://github.com/Jorge975/Lab_Final.git
 
+#Modificar datos
 -git init
 
 -git add .
 
 -git commit -m "first commit"
 
--git remote add origin https://github.com/NOMBRE_USUARIO/NOMBRE_PROYECTO.git
-
--git push -u origin master
+-git push -u origin main
