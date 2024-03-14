@@ -1,6 +1,5 @@
 pipeline {
 	agent any
-	environment { DOCKERHUB_CREDENTIALS = credentials('jorge-dockerhub')}
 	stages {
 		stage('Checkout') {
 			parallel {
@@ -32,26 +31,30 @@ pipeline {
 						}
 					}
 				}
-			}
-		}
-		stage('Build Image') {
-			agent any
-			steps {
-				dir('reto_final_python') {
-					sh 'docker build -t mi_image -f Dockerfile .'
+				stage('Build Image') {
+					agent any
+					steps {
+						dir('reto_final_python') {
+							sh 'docker build -t mi_image -f Dockerfile .'
+						}
+					}
 				}
 			}
 		}
-		stage('Login') {
-			steps {
-				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | sudo docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+		stages {
+			environment { DOCKERHUB_CREDENTIALS = credentials('jorge-dockerhub')}
+			stage('Login') {
+				steps {
+					sh 'echo $DOCKERHUB_CREDENTIALS_PSW | sudo docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+				}	
 			}
+			stage('Push Image to Docker Hub') {         
+				steps{                            
+					sh 'sudo docker push mi_image'
+					sh 'echo "Push Image Completed"'      
+      			}           
+    		}
 		}
-		stage('Push Image to Docker Hub') {         
-			steps{                            
-				sh 'sudo docker push mi_image'
-				sh 'echo "Push Image Completed"'      
-      		}           
-    	}
+		
 	}
 }
