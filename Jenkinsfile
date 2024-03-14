@@ -5,7 +5,7 @@ pipeline {
 			parallel {
 				stage('Install Data') {
 					agent {
-						docker { image 'python:3.12.1' }
+						docker { image '3.12-slim' }
 					}
 					steps {
                         dir('reto_final_python') {
