@@ -9,9 +9,11 @@ pipeline {
 					}
 					steps {
                         dir('reto_final_python') {
-                            sh 'echo "Image installed: " python --version'
-                            sh 'echo "Installation Dates..."'
-                            sh 'pip install -r requirements.txt -r requirements_venv.txt'
+                            sh """
+								echo 'Image installed:' python --version
+								echo 'Installation Dates...'
+								pip install -r requirements.txt -r requirements_venv.txt
+								"""
                         }
 						
 					}
@@ -19,8 +21,10 @@ pipeline {
 				stage('Validation tests and coverage') {
 					steps {
 						dir('reto_final_python') {
-                            sh 'pytest --cov=tests --cov=app'
-							sh 'coverage report -m'
+                            sh """ 
+								pytest --cov=tests --cov=app
+								coverage report -m
+								"""
                         }
 					}
 				}
@@ -41,19 +45,19 @@ pipeline {
 				}
 			}
 		}
-	}
-	stages {
-		environment { DOCKERHUB_CREDENTIALS = credentials('jorge-dockerhub')}
 		stage('Login') {
+			environment { DOCKERHUB_CREDENTIALS = credentials('jorge-dockerhub')}
 			steps {
 				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | sudo docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
 			}	
 		}
 		stage('Push Image to Docker Hub') {         
 			steps{                            
-				sh 'sudo docker push mi_image'
-				sh 'echo "Push Image Completed"'      
+				sh """
+					sudo docker push mi_image
+					echo 'Push Image Completed'
+					"""
       		}           
     	}
-	}		
+	}	
 }
