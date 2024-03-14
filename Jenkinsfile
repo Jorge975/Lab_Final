@@ -41,20 +41,19 @@ pipeline {
 				}
 			}
 		}
-		stages {
-			environment { DOCKERHUB_CREDENTIALS = credentials('jorge-dockerhub')}
-			stage('Login') {
-				steps {
-					sh 'echo $DOCKERHUB_CREDENTIALS_PSW | sudo docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-				}	
-			}
-			stage('Push Image to Docker Hub') {         
-				steps{                            
-					sh 'sudo docker push mi_image'
-					sh 'echo "Push Image Completed"'      
-      			}           
-    		}
-		}
-		
 	}
+	stages {
+		environment { DOCKERHUB_CREDENTIALS = credentials('jorge-dockerhub')}
+		stage('Login') {
+			steps {
+				sh 'echo $DOCKERHUB_CREDENTIALS_PSW | sudo docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+			}	
+		}
+		stage('Push Image to Docker Hub') {         
+			steps{                            
+				sh 'sudo docker push mi_image'
+				sh 'echo "Push Image Completed"'      
+      		}           
+    	}
+	}		
 }
