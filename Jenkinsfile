@@ -8,20 +8,20 @@ pipeline {
 						docker { image 'python:3.12.1' }
 					}
 					steps {
-                        dir('reto_final_python') {
-                            sh 'echo "Image installed: " python --version'
-                            sh 'echo "Installation Dates..."'
-                            sh 'pip install -r requirements.txt -r requirements_venv.txt'
-                        }
+                        			dir('reto_final_python') {
+                            				sh 'echo "Image installed: " python --version'
+                           				sh 'echo "Installation Dates..."'
+                            				sh 'pip install -r requirements.txt -r requirements_venv.txt'
+                        			}
 						
 					}
 				}
 				stage('Validation tests and coverage') {
 					steps {
 						dir('reto_final_python') {
-                            sh 'pytest --cov=tests --cov=app'
+                            				sh 'pytest --cov=tests --cov=app'
 							sh 'coverage report -m'
-                        }
+                        			}
 					}
 				}
 				stage('Linting'){
@@ -53,7 +53,7 @@ pipeline {
 			steps{                            
 				sh 'sudo docker push mi_image'
 				sh 'echo "Push Image Completed"'      
-      		}           
-    	}
+      			}	           
+    		}
 	}		
 }
