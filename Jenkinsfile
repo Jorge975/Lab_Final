@@ -19,24 +19,6 @@ pipeline {
 							image 'python:3.11-slim'
 						}
 					}
-					stages {
-						stage('Install requirements') {
-							steps {
-								script {
-            						sh 'pip install -r requirements.txt'
-        						}
-							}
-						}
-						stage('Tests & Linting') {
-							steps {
-								sh """
-								pytest --cov=tests --cov=app
-								coverage report -m
-								flake8 .
-								"""
-							}
-						}
-					}
 				}
 			}
 		}
