@@ -9,10 +9,8 @@ pipeline {
 		stage('Installation') {
 			parallel {
 				stage('Build Docker Image') {
-					dir {
-						steps {
-							sh 'docker build -t reto_final_python . '
-						}
+					steps {
+						sh 'docker build -t reto_final_python . '
 					}
 				}
 				stage('Test programm') {
