@@ -22,7 +22,11 @@ pipeline {
 					stages {
 						stage('Install requirements') {
 							steps {
-								sh "python -m  pip install -r requirements.txt"
+								script {
+									sh 'python -m venv venv'
+									sh '. venv/bin/activate'
+									sh "pip install -r requirements.txt"
+								}
 							}
 						}
 						stage('Tests & Linting') {
