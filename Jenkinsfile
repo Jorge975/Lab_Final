@@ -23,7 +23,7 @@ pipeline {
 						stage('Install requirements') {
 							steps {
 								dir('reto_final_python') {
-									sh 'pip install -r requirements_venv.txt'
+									sh 'pip install -r requirements_venv.txt ..'
 								}
 							}
 						}
