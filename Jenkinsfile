@@ -22,7 +22,10 @@ pipeline {
 					stages {
 						stage('Install requirements') {
 							steps {
-								sh 'python -m pip install -r requirements.txt --user --no-cache'
+								script {
+            						sh 'apt-get update && apt-get install -y pkg-config'
+            						sh 'python -m pip install -r requirements.txt --user --no-cache'
+        						}
 							}
 						}
 						stage('Tests & Linting') {
