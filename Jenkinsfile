@@ -2,16 +2,16 @@ pipeline {
 	agent any
 	environment { 
 		DOCKERHUB_CREDENTIALS = credentials('jorge-dockerhub')
-		IMAGENNAME = "jorge/reto_final_python"
+		IMAGENAME = "jorge/reto_final_python"
 		DOCKERIMAGE = ''
 		}
 	stages {
 		stage('Installation') {
 			parallel {
 				stage('Build Docker Image') {
-					steps {
-						script {
-							DOCKERIMAGE = docker.build IMAGENNAME
+					dir {
+						steps {
+							sh 'docker build -t reto_final_python . '
 						}
 					}
 				}
@@ -47,7 +47,9 @@ pipeline {
 			steps {
 				sh """
 					echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin
-					docker push $DOCKERIMAGE
+					docker tag reto_final_python $IMAGENAME
+					docker push $IMAGENAME
+
 				"""
 			}
 		}
