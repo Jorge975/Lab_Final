@@ -17,7 +17,7 @@ pipeline {
 					agent {
 						docker {
 							image 'python:3.11-slim'
-							args '--user admin'
+							args '--user root'
 						}
 					}
 					stages {
