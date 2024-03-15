@@ -24,8 +24,7 @@ pipeline {
 						stage('Install requirements') {
 							steps {
 								script {
-									sh 'apt-get update && apt-get install'
-									sh 'apt-get install --yes libmariadb-dev-compat'
+									sh 'apt-get update && apt-get install -y libmariadb-dev-compat'
 									sh 'apt-get install pkg-config'
             						sh 'python -m pip install -r requirements.txt --user --no-cache'
         						}
