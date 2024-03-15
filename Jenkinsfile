@@ -21,8 +21,10 @@ pipeline {
 					}
 					stages {
 						stage('Install requirements') {
-							steps {
-								sh 'pip install -r requirements_venv.txt'
+							dir('reto_final_python') {
+								steps {
+									sh 'pip install -r requirements_venv.txt'
+								}
 							}
 						}
 						stage('Tests & Linting') {
