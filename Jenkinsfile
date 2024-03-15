@@ -23,14 +23,18 @@ pipeline {
 					}
 					stages {
 						stage('Install requirements') {
-							sh 'pip install -r requirements_venv.txt .'
+							steps {
+								sh 'pip install -r requirements_venv.txt .'
+							}
 						}
 						stage('Tests & Linting') {
-							sh """
-							pytest --cov=tests --cov=app
-							coverage report -m
-							flake8 .
-							"""
+							steps {
+								sh """
+								pytest --cov=tests --cov=app
+								coverage report -m
+								flake8 .
+								"""
+							}
 						}
 					}
 				}
