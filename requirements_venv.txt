@@ -3,4 +3,8 @@ SQLAlchemy
 psycopg2-binary
 Flask-SQLAlchemy
 mysqlclient
-pkgconfig
+mysql-connector-c
+pytest
+pytest-flask
+coverage
+pytest-cov
