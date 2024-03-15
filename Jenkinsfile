@@ -24,8 +24,9 @@ pipeline {
 							steps {
 								dir('reto_final_python') {
 									sh """
-										pip install virtualenv
-										pip install -r requirements_venv.txt .
+										virtualenv .venv
+										source .venv/bin/activate
+										pip install -r requirements.txt
 										"""
 								}
 							}
