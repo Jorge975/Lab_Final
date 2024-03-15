@@ -21,9 +21,9 @@ pipeline {
 					}
 					stages {
 						stage('Install requirements') {
-							dir('reto_final_python') {
-								steps {
-									sh 'pip install -r requirements_venv.txt'
+							steps {
+								dir('reto_final_python') {
+									sh 'pip install -r requirements_venv.txt .'
 								}
 							}
 						}
