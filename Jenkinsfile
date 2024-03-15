@@ -24,9 +24,9 @@ pipeline {
 						stage('Install requirements') {
 							steps {
 								script {
+									sh 'apt-get update && apt-get install'
 									sh 'apt-get install libmysqlclient-dev'
 									sh 'apt-get install pkg-config'
-            						sh 'apt-get update && apt-get install -y pkg-config'
             						sh 'python -m pip install -r requirements.txt --user --no-cache'
         						}
 							}
