@@ -22,10 +22,7 @@ pipeline {
 					stages {
 						stage('Install requirements') {
 							steps {
-								sh """
-								pip install --upgrade pip
-								pip install -r requirements_venv.txt .
-								"""
+								sh 'pip install -r requirements_venv.txt'
 							}
 						}
 						stage('Tests & Linting') {
