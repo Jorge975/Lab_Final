@@ -17,6 +17,26 @@ pipeline {
 					agent {
 						docker {
 							image 'python:3.11-slim'
+							args '-u root --privileged'
+						}
+					}
+					stages {
+						stage('Install requirements') {
+							steps {
+								script {
+            						sh 'apt-get update && apt-get install -y pkg-config'
+            						sh 'python -m pip install -r requirements.txt --user --no-cache'
+        						}
+							}
+						}
+						stage('Tests & Linting') {
+							steps {
+								sh """
+								pytest --cov=tests --cov=app
+								coverage report -m
+								flake8 .
+								"""
+							}
 						}
 					}
 				}
