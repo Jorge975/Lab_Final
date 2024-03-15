@@ -3,6 +3,7 @@ SQLAlchemy
 psycopg2-binary
 Flask-SQLAlchemy
 mysqlclient
+pkg-config
 pytest
 pytest-flask
 coverage
