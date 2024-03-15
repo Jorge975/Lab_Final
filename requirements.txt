@@ -2,5 +2,7 @@ Flask
 SQLAlchemy
 psycopg2-binary
 Flask-SQLAlchemy
+pkg-config
+libmysqlclient-dev
 mysqlclient
 
