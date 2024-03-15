@@ -16,7 +16,7 @@ pipeline {
 				stage('Test programm') {
 					agent {
 						docker {
-							image 'python:3.12-slim'
+							image 'python:3.9-slim'
 						}
 					}
 					stages {
