@@ -22,7 +22,7 @@ pipeline {
 					stages {
 						stage('Install requirements') {
 							steps {
-								sh "sudo pip install -r requirements.txt"
+								sh "python -m  pip install -r requirements.txt"
 							}
 						}
 						stage('Tests & Linting') {
