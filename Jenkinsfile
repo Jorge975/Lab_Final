@@ -31,16 +31,17 @@ pipeline {
 									sh 'apt-get update && apt-get install -y pkg-config'
 									sh 'apt-get update && apt-get install -y build-essential'
 									sh 'python -m pip install -r requirements_venv.txt --user --no-cache'
-									sh """
-									coverage run -m pytest
-									coverage report -m
-									"""
         						}
 							}
 						}
 						stage('Linting') {
 							steps {
 								dir('reto_final_python'){
+									sh """
+									pip install coverage
+									coverage run -m pytest
+									coverage report -m
+									"""
 									sh 'flake8'
 								}
 							}
