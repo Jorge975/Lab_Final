@@ -27,7 +27,7 @@ pipeline {
 								dir('reto_final_python'){
 									sh """
 									pip install coverage
-									coverage run -m pytest
+									coverage run -m tests
 									coverage report -m
 									"""
 									sh 'flake8'
