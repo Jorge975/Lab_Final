@@ -2,7 +2,7 @@ pipeline {
 	agent any
 	environment { 
 		DOCKERHUB_CREDENTIALS = credentials('jorge-dockerhub')
-		IMAGENAME = "jorge/reto_final_python"
+		IMAGENAME = "admin/reto_final_python"
 		DOCKERIMAGE = ''
 		}
 	stages {
