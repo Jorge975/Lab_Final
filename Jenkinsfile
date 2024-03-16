@@ -24,9 +24,16 @@ pipeline {
 					stages {
 						stage('apt install') {
 							steps {
+								sh 'apt-get update && apt-get install -y python3-dev'
+								sh 'apt-get update && apt-get install -y default-libmysqlclient-dev'
+								sh 'apt-get update && apt-get install -y build-essential'
 								sh 'apt-get update && apt-get install -y pkg-config'
-								sh 'pip install -r requirements.txt -r requirements_venv.txt'
         						
+							}
+						}
+						stage('pip install') {
+							steps {
+								sh 'pip install -r requirements.txt -r requirements_venv.txt'
 							}
 						}
 						stage('Coverage & Test') {
