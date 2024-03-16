@@ -36,7 +36,7 @@ pipeline {
 						stage('Tests & Linting') {
 							steps {
 								script {
-									sh 'pytest'
+									sh 'pytest tests/'
 									sh 'pytest --cov=tests --cov=app'
 									sh 'coverage report -m'
 									sh 'flake8'
