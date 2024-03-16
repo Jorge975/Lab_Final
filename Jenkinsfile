@@ -26,7 +26,8 @@ pipeline {
 							steps {
 								dir('reto_final_python'){
 									sh 'pip install coverage'
-									sh 'pytest --cov=test/'
+									sh 'pip install pytest'
+									sh 'pytest --cov=test --cov=app'
 									sh 'coverage report -m'
 									sh 'flake8'
 								}
