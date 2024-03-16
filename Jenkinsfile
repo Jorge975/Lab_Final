@@ -27,10 +27,6 @@ pipeline {
 								script {
 									sh 'apt-get update && apt-get install -y pkg-config'
         						}
-							}
-						}
-						stage('pip install') {
-							steps {
 								sh 'pip install -r requirements.txt -r requirements_venv.txt'
 							}
 						}
