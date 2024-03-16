@@ -1,4 +1,5 @@
 pipeline {
+	pipeline {
 	agent any
 	environment { 
 		DOCKERHUB_CREDENTIALS = credentials('admin-dockerhub')
@@ -13,41 +14,39 @@ pipeline {
 						sh 'docker build -t reto_final_python . '
 					}
 				}
-				stage('Test & Coverage') {
+				stage('Test programm') {
 					agent {
 						docker {
 							image 'python:3.11-slim'
 							args '-u root --privileged'
 						}
 					}
-					steps {
-						dir('reto_final_python') {
-							script {
-								sh 'apt-get update && apt-get install -y virtualenv'
-								sh 'virtualenv venv'
-								sh '. venv/bin/activate'
-								sh 'apt-get update && apt-get install -y libmariadb-dev-compat'
-								sh 'apt-get update && apt-get install -y pkg-config'
-								sh 'apt-get update && apt-get install -y build-essential'
-								sh 'pip install -r requirements_venv.txt'
-								sh """
-								coverage run -m pytest
-								coverage report -m
-								"""
+					stages {
+						stage('Install requirements') {
+							steps {
+								script {
+									sh 'apt-get update && apt-get install -y virtualenv'
+									sh 'virtualenv venv && . venv/bin/activate'
+									sh 'apt-get update && apt-get install -y libmariadb-dev-compat'
+									sh 'apt-get update && apt-get install -y pkg-config'
+									sh 'apt-get update && apt-get install -y build-essential'
+									sh 'python -m pip install -r requirements_venv.txt --user --no-cache'
+									sh """
+									coverage run -m pytest
+									coverage report -m
+									"""
+        						}
+							}
+						}
+						stage('Linting') {
+							steps {
+								dir('reto_final_python'){
+									sh 'flake8'
+								}
 							}
 						}
 					}
 				}
-				stage('Linting') {
-					steps {
-						dir('reto_final_python') {
-							script {
-								sh 'pip install flake8'
-								sh 'flake8'
-							}
-						}
-					}
-        		}
 			}
 		}
 		stage('Login & Push ') {
