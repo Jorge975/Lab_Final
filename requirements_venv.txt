@@ -4,3 +4,4 @@ coverage
 pytest-cov
 flask_sqlalchemy
 mysqlclient
+pkg-config
