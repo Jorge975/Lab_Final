@@ -24,12 +24,10 @@ pipeline {
 					stages {
 						stage('Linting') {
 							steps {
-									sh 'pip install coverage'
-									sh 'pip install pytest'
-									sh 'pip install pytest-cov'
-									sh 'coverage run -m pytest'
-									sh 'coverage report -m'
-									sh 'flake8'
+								sh 'pip install -r requirements_venv.txt'
+								sh 'coverage run -m pytest'
+								sh 'coverage report -m'
+								sh 'flake8'
 								
 							}
 						}
