@@ -35,7 +35,7 @@ pipeline {
 						stage('pip install') {
 							steps {
 								sh 'virtualenv venv && . venv/bin/activate'
-								sh 'pip install -r requirements_venv.txt -r requirements.txt'
+								sh 'pip install -r requirements_venv.txt'
 							}
 						}
 						stage('Coverage & Test') {
