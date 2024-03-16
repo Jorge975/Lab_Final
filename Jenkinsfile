@@ -23,26 +23,35 @@ pipeline {
 					stages {
 						stage('Install requirements') {
 							steps {
-								script {
-									sh 'apt-get update && apt-get install -y libmariadb-dev-compat'
-									sh 'apt-get update && apt-get install -y pkg-config'
-									sh 'apt-get update && apt-get install -y build-essential'
-									sh 'apt-get update && apt-get install -y virtualenv'
-									sh 'virtualenv venv && . venv/bin/activate'
-            						sh 'python -m pip install -r requirements_venv.txt --user --no-cache'
-        						}
+								dir('reto_final_python'){
+									script {
+										sh 'apt-get update && apt-get install -y libmariadb-dev-compat'
+										sh 'apt-get update && apt-get install -y pkg-config'
+										sh 'apt-get update && apt-get install -y build-essential'
+										sh 'apt-get update && apt-get install -y virtualenv'
+										sh 'virtualenv venv && . venv/bin/activate'
+										sh 'python -m pip install -r requirements_venv.txt --user --no-cache'
+									
+        							}
+								}
 							}
 						}
-						stage('Tests & Linting') {
+						stage('Tests & overage') {
 							steps {
 								dir('reto_final_python'){
 									sh """
 									coverage run -m pytest
 									coverage report -m
 									"""
-									sh 'flake8'
 								}
 							}						
+						}
+						stage('Linting') {
+							steps {
+								dir('reto_final_python'){
+									sh 'flake8'
+								}
+							}
 						}
 					}
 				}
