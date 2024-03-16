@@ -24,14 +24,13 @@ pipeline {
 					stages {
 						stage('Linting') {
 							steps {
-								dir('reto_final_python'){
 									sh 'pip install coverage'
 									sh 'pip install pytest'
 									sh 'pip install pytest-cov'
 									sh 'coverage run -m pytest'
 									sh 'coverage report -m'
 									sh 'flake8'
-								}
+								
 							}
 						}
 					}
