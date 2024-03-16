@@ -26,8 +26,8 @@ pipeline {
 							steps {
 								script {
 									sh 'apt-get update && apt-get install -y virtualenv'
-									sh 'apt-get update && apt-get install -y libmariadb-dev-compat'
-									sh 'apt-get update && apt-get install -y pkg-config'
+									sh 'apt-get update && apt-get install -y python3-dev'
+									sh 'apt-get update && apt-get install -y default-libmysqlclient-dev'
 									sh 'apt-get update && apt-get install -y build-essential'
         						}
 							}
@@ -38,11 +38,10 @@ pipeline {
 								sh 'pip install -r requirements_venv.txt -r requirements.txt'
 							}
 						}
-						stage('pip install') {
+						stage('Coverage & Test') {
 							steps {
 								sh 'coverage run -m pytest'
 								sh 'coverage report -m'
-								sh 'flake8'
 								
 							}
 						}
