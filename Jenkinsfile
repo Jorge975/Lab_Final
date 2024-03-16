@@ -27,7 +27,10 @@ pipeline {
 									sh 'apt-get update && apt-get install -y libmariadb-dev-compat'
 									sh 'apt-get update && apt-get install -y pkg-config'
 									sh 'apt-get update && apt-get install -y build-essential'
-            						sh 'python -m pip install -r requirements.txt -r requirements_venv.txt --user --no-cache'
+									sh 'apt-get update && apt-get install -y virtualenv'
+									sh 'virtualenv venv'
+									sh 'venv/Scripts/activate'
+            						sh 'python -m pip install -r requirements_venv.txt --user --no-cache'
         						}
 							}
 						}
