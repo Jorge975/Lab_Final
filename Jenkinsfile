@@ -25,8 +25,12 @@ pipeline {
 							script {
 								// Instalar requisitos y ejecutar pruebas
 								sh """
+								apt-get update && apt-get install -y virtualenv
 								virtualenv venv
 								. venv/bin/activate
+								apt-get update && apt-get install -y libmariadb-dev-compat
+								apt-get update && apt-get install -y pkg-config
+								apt-get update && apt-get install -y build-essential
 								pip install -r requirements_venv.txt
 								coverage run -m pytest
 								coverage report -m
@@ -39,7 +43,7 @@ pipeline {
 					steps {
 						dir('reto_final_python') {
 							script {
-								// Ejecutar linter
+								sh 'pip install flake8'
 								sh 'flake8'
 							}
 						}
