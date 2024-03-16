@@ -35,6 +35,7 @@ pipeline {
 						}
 						stage('Tests & Linting') {
 							steps {
+									sh 'pip install coverage'
 									sh 'coverage run -m pytest'
 									sh 'coverage report -m'
 									sh 'flake8'
