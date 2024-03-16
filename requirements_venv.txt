@@ -3,3 +3,4 @@ pytest-flask
 coverage
 pytest-cov
 flask_sqlalchemy
+MySQLdb
