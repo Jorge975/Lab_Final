@@ -38,8 +38,8 @@ pipeline {
 									sh 'coverage run -m pytest'
 									sh 'coverage report -m'
 									sh 'flake8'
-								}
 							}
+							
 						}
 					}
 				}
