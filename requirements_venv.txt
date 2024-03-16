@@ -1,6 +1,7 @@
 coverage
 pytest
-pymysql
+MySQLdb
+#pymysql
 #mysql-connector-python
 #mysqlclient
 #pytest-flask
