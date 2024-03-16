@@ -5,7 +5,7 @@ from flask import Config
 
 class TestingConfig(Config):
 
-    SQLALCHEMY_DATABASE_URI = os.environ.get("mysql://")
+    SQLALCHEMY_DATABASE_URI = os.environ.get("'mysql+mysqldb://root:root@localhost/database?unix_socket=/path/to/mysqld.sock'")
     DEBUG = True
     TESTING = False
 
