@@ -25,11 +25,9 @@ pipeline {
 						stage('Linting') {
 							steps {
 								dir('reto_final_python'){
-									sh """
-									pip install coverage
-									coverage run -m tests
-									coverage report -m
-									"""
+									sh 'pip install coverage'
+									sh 'coverage run -m tests'
+									sh 'coverage report -m'
 									sh 'flake8'
 								}
 							}
