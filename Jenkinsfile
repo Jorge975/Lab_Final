@@ -35,12 +35,9 @@ pipeline {
 						}
 						stage('Tests & Linting') {
 							steps {
-								script {
-									sh 'python -m coverage report -m'
-									sh 'flake8'
-								}
-							}
-							
+								sh 'coverage report -m'
+								sh 'flake8'
+							}						
 						}
 					}
 				}
