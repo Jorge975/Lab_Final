@@ -1,8 +1,8 @@
 pipeline {
 	agent any
 	environment { 
-		DOCKERHUB_CREDENTIALS = credentials('jorge-dockerhub')
-		IMAGENAME = "jorge/reto_final_python"
+		DOCKERHUB_CREDENTIALS = credentials('admin-dockerhub')
+		IMAGENAME = "admin/reto_final_python"
 		DOCKERIMAGE = ''
 		}
 	stages {
@@ -36,9 +36,9 @@ pipeline {
 						stage('Tests & Linting') {
 							steps {
 								script {
-									sh 'test_app.py'
-									sh '. pytest --cov=tests --cov=app'
-									sh 'coverage report -m'
+									sh 'python -m pytest tests/'
+									sh 'python -m pytest --cov=tests --cov=app'
+									sh 'python -m coverage report -m'
 									sh 'flake8'
 								}
 							}
