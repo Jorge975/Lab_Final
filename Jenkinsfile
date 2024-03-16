@@ -35,9 +35,12 @@ pipeline {
 						}
 						stage('Tests & Linting') {
 							steps {
+								script {
+									sh 'apt-get update && apt-get install -y coverage'
 									sh 'coverage run -m pytest'
 									sh 'coverage report -m'
 									sh 'flake8'
+								}
 							}
 							
 						}
