@@ -24,7 +24,7 @@ pipeline {
 					stages {
 						stage('Linting') {
 							steps {
-								sh 'pip install -r requirements_venv.txt -r requirements.txt'
+								sh 'pip install -r requirements_venv.txt'
 								sh 'coverage run -m pytest'
 								sh 'coverage report -m'
 								sh 'flake8'
