@@ -22,20 +22,9 @@ pipeline {
 						}
 					}
 					stages {
-						stage('apt install') {
-							steps {
-								script {
-									sh 'apt-get update && apt-get install -y virtualenv'
-									sh 'apt-get update && apt-get install -y python3-dev'
-									sh 'apt-get update && apt-get install -y default-libmysqlclient-dev'
-									sh 'apt-get update && apt-get install -y build-essential'
-        						}
-							}
-						}
 						stage('pip install') {
 							steps {
-								sh 'virtualenv venv && . venv/bin/activate'
-								sh 'pip install -r requirements_venv.txt'
+								sh 'pip install -r requirements.txt'
 							}
 						}
 						stage('Coverage & Test') {
