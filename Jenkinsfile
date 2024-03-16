@@ -23,14 +23,14 @@ pipeline {
 					steps {
 						dir('reto_final_python') {
 							script {
+								sh 'apt-get update && apt-get install -y virtualenv'
+								sh 'virtualenv venv'
+								sh '. venv/bin/activate'
+								sh 'apt-get update && apt-get install -y libmariadb-dev-compat'
+								sh 'apt-get update && apt-get install -y pkg-config'
+								sh 'apt-get update && apt-get install -y build-essential'
+								sh 'pip install -r requirements_venv.txt'
 								sh """
-								apt-get update && apt-get install -y virtualenv
-								virtualenv venv
-								. venv/bin/activate
-								apt-get update && apt-get install -y libmariadb-dev-compat
-								apt-get update && apt-get install -y pkg-config
-								apt-get update && apt-get install -y build-essential
-								pip install -r requirements_venv.txt
 								coverage run -m pytest
 								coverage report -m
 								"""
