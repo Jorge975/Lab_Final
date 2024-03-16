@@ -1,17 +1,13 @@
 import os
 import pytest
 from app import create_app, db
-from tests import DevelopementConfig
+from app.config import config_dict
 
-env_name = os.getenv("FLASK_ENV", "development")
+env_name = os.getenv("FLASK_ENV", "testing")
 @pytest.fixture()
 def app():
     
     app = create_app(env_name)
-
-    app.config.update({
-        "TESTING": True,
-    })
 
     # other setup can go here
 

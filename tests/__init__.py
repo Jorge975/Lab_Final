@@ -1,7 +1,9 @@
 import os
+
+import os
 from flask import Config
 
-class DevelopementConfig(Config):
+class TestingConfig(Config):
 
     SQLALCHEMY_DATABASE_URI = os.environ.get("mysql://")
     DEBUG = True
