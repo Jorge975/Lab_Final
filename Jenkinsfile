@@ -27,14 +27,13 @@ pipeline {
 									sh 'apt-get update && apt-get install -y libmariadb-dev-compat'
 									sh 'apt-get update && apt-get install -y pkg-config'
 									sh 'apt-get update && apt-get install -y build-essential'
-            						sh 'python -m pip install -r requirements.txt --user --no-cache'
+            						sh 'python -m pip install -r requirements.txt -r requirements_venv.txt --user --no-cache'
         						}
 							}
 						}
 						stage('Tests & Linting') {
 							steps {
 								sh """
-								pip install pytest
 								pytest --cov=tests --cov=app
 								coverage report -m
 								flake8 .
