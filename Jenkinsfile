@@ -28,7 +28,7 @@ pipeline {
 									sh 'pip install coverage'
 									sh 'pip install pytest'
 									sh 'pip install pytest-cov'
-									sh 'coverage run -m pytest .'
+									sh 'coverage run -m tests .'
 									sh 'coverage report -m'
 									sh 'flake8'
 								}
