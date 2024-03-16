@@ -13,45 +13,38 @@ pipeline {
 						sh 'docker build -t reto_final_python . '
 					}
 				}
-				stage('Test programm') {
+				stage('Test & Coverage') {
 					agent {
 						docker {
 							image 'python:3.11-slim'
 							args '-u root --privileged'
 						}
 					}
-					stages {
-						stage('Install requirements') {
-							steps {
-								script {
-									sh 'apt-get update && apt-get install -y libmariadb-dev-compat'
-									sh 'apt-get update && apt-get install -y pkg-config'
-									sh 'apt-get update && apt-get install -y build-essential'
-									sh 'apt-get update && apt-get install -y virtualenv'
-									sh 'virtualenv venv && . venv/bin/activate'
-									sh 'python -m pip install -r requirements_venv.txt --user --no-cache'
-        						}
-							}
-						}
-						stage('Tests & overage') {
-							steps {
-								dir('reto_final_python'){
-									sh """
-									coverage run -m pytest
-									coverage report -m
-									"""
-								}
-							}						
-						}
-						stage('Linting') {
-							steps {
-								dir('reto_final_python'){
-									sh 'flake8'
-								}
+					steps {
+						dir('reto_final_python') {
+							script {
+								// Instalar requisitos y ejecutar pruebas
+								sh """
+								virtualenv venv
+								. venv/bin/activate
+								pip install -r requirements_venv.txt
+								coverage run -m pytest
+								coverage report -m
+								"""
 							}
 						}
 					}
-				}
+        		}
+				stage('Linting') {
+					steps {
+						dir('reto_final_python') {
+							script {
+								// Ejecutar linter
+								sh 'flake8'
+							}
+						}
+					}
+        		}
 			}
 		}
 		stage('Login & Push ') {
