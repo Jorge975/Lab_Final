@@ -30,13 +30,12 @@ pipeline {
 									sh 'apt-get update && apt-get install -y virtualenv'
 									sh 'virtualenv venv && . venv/bin/activate'
             						sh 'python -m pip install -r requirements_venv.txt --user --no-cache'
-									sh 'coverage run -m pytest'
         						}
 							}
 						}
-						stage('Coverage & Linting') {
+						stage('Tests & Linting') {
 							steps {
-								script {
+									sh 'coverage run -m pytest'
 									sh 'coverage report -m'
 									sh 'flake8'
 								}
