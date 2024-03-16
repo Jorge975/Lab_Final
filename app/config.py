@@ -22,6 +22,7 @@ class ProductionConfig(Config):
 
 class TestingConfig(Config):
     TESTING = True
+    #SQLALCHEMY_DATABASE_URI = 'mysql://root:root@localhost/miproyecto/Persons'
 
 # Dictionary to map environment names to configuration classes
 config_dict = {
