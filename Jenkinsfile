@@ -24,10 +24,9 @@ pipeline {
 					stages {
 						stage('apt install') {
 							steps {
-								script {
-									sh 'apt-get update && apt-get install -y pkg-config'
-									sh 'pip install -r requirements.txt -r requirements_venv.txt'
-        						}
+								sh 'apt-get update && apt-get install -y pkg-config'
+								sh 'pip install -r requirements.txt -r requirements_venv.txt'
+        						
 							}
 						}
 						stage('Coverage & Test') {
