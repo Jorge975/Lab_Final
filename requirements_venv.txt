@@ -1,6 +1,6 @@
-#pytest
-#pytest-flask
 coverage
+pytest
+#pytest-flask
 #pytest-cov
 #flask_sqlalchemy
 #mysqlclient
