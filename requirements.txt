@@ -3,5 +3,5 @@ SQLAlchemy
 psycopg2-binary
 Flask-SQLAlchemy
 mysqlclient
-build-essential
+
 
