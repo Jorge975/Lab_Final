@@ -35,12 +35,12 @@ pipeline {
 						}
 						stage('Tests & Linting') {
 							steps {
-								sh """
-								pytest
-								pytest --cov=tests --cov=app
-								coverage report -m
-								flake8 .
-								"""
+								script {
+									sh 'pytest'
+									sh 'pytest --cov=tests --cov=app'
+									sh 'coverage report -m'
+									sh 'flake8'
+								}
 							}
 						}
 					}
