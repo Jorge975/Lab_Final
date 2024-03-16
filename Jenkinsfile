@@ -29,7 +29,7 @@ pipeline {
 									sh 'apt-get update && apt-get install -y build-essential'
 									sh 'apt-get update && apt-get install -y virtualenv'
 									sh 'virtualenv venv'
-									sh '. venv/Scripts/activate'
+									sh '.\\venv\Scripts\activate.bat'
             						sh 'python -m pip install -r requirements_venv.txt --user --no-cache'
         						}
 							}
