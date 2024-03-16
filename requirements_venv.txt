@@ -1,6 +1,7 @@
 coverage
 pytest
+mysqlclient
 #pytest-flask
 #pytest-cov
 #flask_sqlalchemy
-#mysqlclient
+
