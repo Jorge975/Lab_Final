@@ -24,7 +24,7 @@ pipeline {
 					stages {
 						stage('pip install') {
 							steps {
-								sh 'pip install -r requirements.txt'
+								sh 'pip install -r requirements.txt -r requirements_venv.txt '
 							}
 						}
 						stage('Coverage & Test') {
