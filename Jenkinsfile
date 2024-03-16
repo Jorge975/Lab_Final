@@ -22,9 +22,24 @@ pipeline {
 						}
 					}
 					stages {
-						stage('Linting') {
+						stage('apt install') {
 							steps {
-								sh 'pip install -r requirements_venv.txt'
+								script {
+									sh 'apt-get update && apt-get install -y virtualenv'
+									sh 'apt-get update && apt-get install -y libmariadb-dev-compat'
+									sh 'apt-get update && apt-get install -y pkg-config'
+									sh 'apt-get update && apt-get install -y build-essential'
+        						}
+							}
+						}
+						stage('pip install') {
+							steps {
+								sh 'virtualenv venv && . venv/bin/activate'
+								sh 'pip install -r requirements_venv.txt -r requirements.txt'
+							}
+						}
+						stage('pip install') {
+							steps {
 								sh 'coverage run -m pytest'
 								sh 'coverage report -m'
 								sh 'flake8'
