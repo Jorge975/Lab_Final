@@ -37,8 +37,8 @@ pipeline {
 							steps {
 								script {
 									sh 'python -m pytest tests/'
-									sh 'pytest --cov=tests --cov=app'
-									sh 'coverage report -m'
+									sh 'python -m pytest --cov=tests --cov=app'
+									sh 'python -m coverage report -m'
 									sh 'flake8'
 								}
 							}
