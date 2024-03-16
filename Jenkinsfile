@@ -35,8 +35,13 @@ pipeline {
 						}
 						stage('Tests & Linting') {
 							steps {
-								sh 'coverage report -m'
-								sh 'flake8'
+								dir('reto_final_python'){
+									sh """
+									coverage run -m pytest
+									coverage report -m
+									"""
+									sh 'flake8'
+								}
 							}						
 						}
 					}
