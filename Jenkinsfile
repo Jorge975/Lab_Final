@@ -37,6 +37,7 @@ pipeline {
 						stage('Tests & Linting') {
 							steps {
 								sh """
+								pytest
 								pytest --cov=tests --cov=app
 								coverage report -m
 								flake8 .
