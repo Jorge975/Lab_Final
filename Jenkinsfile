@@ -46,13 +46,13 @@ pipeline {
 		}
 		stage('Login & Push ') {
 			when {
-                    branch "main/develop"
-                }
-			steps {
-				sh 'echo "$DOCKERHUB_CREDENTIALS_PSW" | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-				sh 'docker tag docker-image $IMAGENAME'
-				sh 'docker push $IMAGENAME'
-			}
+                branch "main/develop"
+				steps {
+					sh 'echo "$DOCKERHUB_CREDENTIALS_PSW" | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+					sh 'docker tag docker-image $IMAGENAME'
+					sh 'docker push $IMAGENAME'
+				}
+            }
 		}
 	}	
 }
