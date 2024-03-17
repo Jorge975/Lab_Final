@@ -25,7 +25,7 @@ pipeline {
 						stage('apt install') {
 							steps {
 								script {
-									sh 'sudo apt-get update && apt-get install -y pkg-config'
+									sh 'apt-get update && apt-get install -y pkg-config'
         						}
 							}
 						}
