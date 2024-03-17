@@ -1,6 +1,5 @@
-coverage
 pytest
-pymysql
-#mysql-connector-python
-#flask_mysqldb
-
+pytest-flask
+coverage
+pytest-cov
+flask_sqlalchemy
