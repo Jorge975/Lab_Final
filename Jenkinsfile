@@ -46,8 +46,8 @@ pipeline {
 		}
 		stage('Login & Push ') {
 			steps {
-				ssh "docker login -u $DOCKERHUB_CREDENTIALS_USR --password \"$DOCKERHUB_CREDENTIALS_PSW\""
-				sh "docker tag docker-image $IMAGENAME'"
+				sh "docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin"
+				sh "docker tag docker-image $IMAGENAME"
 				sh "docker push $IMAGENAME"
 			}
 		}
