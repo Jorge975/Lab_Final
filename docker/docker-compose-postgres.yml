@@ -2,7 +2,7 @@ version: '3.8'
 services:
   app:
     build:
-      context: .
+      context: ..
       dockerfile: Dockerfile
     ports:
       - 5000:5000
@@ -20,10 +20,10 @@ services:
     image: postgres:latest
     restart: always
     environment:
-      MYSQL_DATABASE: 'miproyecto'
-      MYSQL_USER: 'user'
-      MYSQL_PASSWORD: 'password'
-      MYSQL_ROOT_PASSWORD: 'root'
+      POSTGRES_DB: 'miproyecto'
+      POSTGRES_USER: 'user'
+      POSTGRES_PASSWORD: 'password'
+      POSTGRES_ROOT_PASSWORD: 'root'
     ports:
       - '5432:5432'
     volumes:

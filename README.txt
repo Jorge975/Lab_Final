@@ -23,7 +23,8 @@
 # Crear el contenedor con docker-compose
 - docker-compose -f docker/docker-compose-mysql.yml up
 # Ejecutar mysql
-- docker exec -it reto_final_python-db-1 mysql -u root -p
+- docker exec -it docker-db-1 mysql -u root -p
+
 
 ---------------------------------------------------------------------
 
@@ -31,8 +32,10 @@
 
 # Crear el contenedor con docker-compose
 - docker-compose -f docker/docker-compose-postgres.yml up
-# Ejecutar mysql
-- docker exec -it reto_final_python-db-1 mysql -u root -p
+# Ejecutar postgres sin entrar en la base de datos
+- docker exec -it docker-db-1 psql -U user -d postgres
+# Ejecutar postgres entrando en la base de datos
+- docker exec -it docker-db-1 psql -U user miproyecto
 
 ---------------------------------------------------------------------
 
