@@ -44,6 +44,7 @@ pipeline {
 						}
 						stage('Linting') {
 							steps {
+								sh 'pip install flake8'
 								sh 'flake8'
 							}
 						}
