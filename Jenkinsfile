@@ -3,7 +3,7 @@ pipeline {
 	agent any
 	environment { 
 		DOCKERHUB_CREDENTIALS = credentials('admin-dockerhub')
-		IMAGENAME = "admin/reto_final_python"
+		IMAGENAME = "jcasillas245a/reto_final_python"
 		DOCKERIMAGE = ''
 		}
 	stages {
@@ -11,7 +11,7 @@ pipeline {
 			parallel {
 				stage('Build Docker Image') {
 					steps {
-						sh 'docker build -t reto_final_python . '
+						sh 'docker build -t docker-imagen -f docker/Dockerfile .'
 					}
 				}
 				stage('Test programm') {
@@ -22,8 +22,16 @@ pipeline {
 						}
 					}
 					stages {
+						stage('apt install') {
+							steps {
+								script {
+									sh 'apt-get update && apt-get install -y virtualenv'
+        						}
+							}
+						}
 						stage('pip install') {
 							steps {
+								sh 'virtualenv venv && . venv/bin/activate'
 								sh 'pip install -r requirements.txt -r requirements_venv.txt'
 							}
 						}
@@ -49,7 +57,7 @@ pipeline {
 			steps {
 				sh """
 					echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin
-					docker tag reto_final_python $IMAGENAME
+					docker tag docker-image $IMAGENAME
 					docker push $IMAGENAME
 
 				"""
