@@ -4,7 +4,7 @@ pipeline {
 	environment { 
 		DOCKERHUB_CREDENTIALS = credentials('jorge-dockerhub')
 		IMAGENAME = "jcasillas245a/reto_final_python"
-		DOCKERIMAGE = ''
+		VERSION = '1'
 		}
 	stages {
 		stage('Installation') {
@@ -47,8 +47,8 @@ pipeline {
 		stage('Login & Push ') {
 			steps {
 				sh "docker login -u $DOCKERHUB_CREDENTIALS_USR --password $DOCKERHUB_CREDENTIALS_PSW"
-				sh "docker tag docker-image $IMAGENAME:latest"
-				sh "docker push $IMAGENAME:latest"
+				sh "docker tag docker-image $IMAGENAME:$VERSION"
+				sh "docker push $IMAGENAME:$VERSION"
 			}
 		}
 	}	
