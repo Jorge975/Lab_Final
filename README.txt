@@ -18,8 +18,19 @@
 
 ---# CREAR ENTORNO DE DESARROLLO LOCAL + MYSQL
 
+(Aunque funciona localmente no lo hace en Jenkins)
+
 # Crear el contenedor con docker-compose
-- docker-compose up
+- docker-compose -f docker/docker-compose-mysql.yml up
+# Ejecutar mysql
+- docker exec -it reto_final_python-db-1 mysql -u root -p
+
+---------------------------------------------------------------------
+
+---# CREAR ENTORNO DE DESARROLLO LOCAL + POSTGRES
+
+# Crear el contenedor con docker-compose
+- docker-compose -f docker/docker-compose-postgres.yml up
 # Ejecutar mysql
 - docker exec -it reto_final_python-db-1 mysql -u root -p
 
