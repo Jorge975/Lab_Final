@@ -7,7 +7,7 @@ class Config:
 
     # Database configuration
     SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URI", "postgresql://root:root@localhost/miproyecto")
-     #SQLALCHEMY_DATABASE_URI = os.environ.get("mysql://root:root@localhost/miproyecto/miproyecto")
+     #SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URI", "mysql+mysqldb://root:root@localhost/miproyecto/miproyecto")
     SQLALCHEMY_TRACK_MODIFICATIONS = False
 
     # Add other configuration variables as needed
