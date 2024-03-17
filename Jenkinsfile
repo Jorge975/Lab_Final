@@ -31,7 +31,11 @@ pipeline {
 							steps {
 								sh 'coverage run -m pytest .'
 								sh 'coverage report -m'
-								
+							}
+						}
+						stage('Linting') {
+							steps {
+								sh 'flake8'
 							}
 						}
 					}
