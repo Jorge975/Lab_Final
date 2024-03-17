@@ -22,11 +22,13 @@ pipeline {
 						}
 					}
 					stages {
-						steps {
+						stage('apt install') {
+							steps {
 								script {
 									sh 'apt-get update && apt-get install -y python3-mysqldb'
         						}
 							}
+						}
 						stage('pip install') {
 							steps {
 								sh 'pip install -r requirements.txt -r requirements_venv.txt'
