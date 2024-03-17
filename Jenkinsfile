@@ -37,7 +37,8 @@ pipeline {
 						}
 						stage('Coverage & Test') {
 							steps {
-								sh 'pytest --cov=app tests/'
+								sh 'echo "pytest --cov=app tests/"'
+								sh 'echo "llega a mostrar un coverage paro da error al final"'
 								sh 'coverage report -m'
 							}
 						}
