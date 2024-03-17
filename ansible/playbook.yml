@@ -1,0 +1,39 @@
+---
+- name: Database
+  hosts: db
+  gather_facts: false
+  become: true
+  tasks:
+    - name: Install docker-compose
+      docker_compose:
+      command: docker-compose -f docker/docker-compose-postgres.yml up
+      register: echo_output
+
+    - name: Debug
+      debug: 
+        msg: "echo output is '{{echo_output.stdout }}'"
+
+- name: Test commands
+  hosts: app
+  tasks:
+    - name: Instalando software python
+      command: sudo apt install python3-pip
+      register: echo_output
+
+    - name: Install virtualenv
+      command: sudo pip3 install virtualenv
+      register: echo_output
+
+    - name: build it virtualenv
+      command: virtualenv venv
+      register: echo_output
+
+    - name: Access venv
+      command: venv/Scripts/activate
+    
+    - name: Install modules
+      command: pip install -r requirements.txt -r requirements_venv.txt
+        
+    - name: Debug
+      debug: 
+        msg: "echo output is '{{echo_output.stdout }}'"

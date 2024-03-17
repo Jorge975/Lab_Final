@@ -1,0 +1,10 @@
+---
+db:
+  hosts:
+    localhost:
+      ansible_connection: local
+
+app:
+  hosts:
+    localhost:
+      ansible_connection: local

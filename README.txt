@@ -65,9 +65,8 @@ FLUSH PRIVILEGES;
 
 # Para hacer pruebas unitarias usamos pytest
 # Para ejecutar test:
-- pytest
-# Para los test de cobertura:
--pytest --cov=tests --cov=app
+- pytest --cov=app tests/
+# Coverage:
 -coverage report -m
 
 -----------------------------------------------------------------------
