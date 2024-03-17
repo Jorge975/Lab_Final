@@ -25,13 +25,12 @@ pipeline {
 						stage('apt install') {
 							steps {
 								script {
-									sh 'apt-get update && apt-get install -y virtualenv'
+									sh 'sudo apt-get update && apt-get install -y pkg-config'
         						}
 							}
 						}
 						stage('pip install') {
 							steps {
-								sh 'virtualenv venv && . venv/bin/activate'
 								sh 'pip install -r requirements.txt -r requirements_venv.txt'
 							}
 						}
