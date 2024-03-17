@@ -16,7 +16,7 @@ services:
     depends_on:
      - db
 
-  db:
+  db_mysql:
     image: mysql:latest
     restart: always
     environment:
@@ -29,6 +29,20 @@ services:
     expose:
       - '3306'
     volumes:
-      - my-db:/var/lib/mysql
+      - my-db_mysql:/var/lib/mysql
+
+  db_postgres:
+    image: postgres:latest
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'miproyecto'
+      MYSQL_USER: 'user'
+      MYSQL_PASSWORD: 'password'
+      MYSQL_ROOT_PASSWORD: 'root'
+    ports:
+      - '5432:5432'
+    volumes:
+      - my-db_postgres:/var/lib/postgresql
 volumes:
-  my-db:
+  my-db_mysql:
+  my-db_postgres:
