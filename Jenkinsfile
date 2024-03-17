@@ -11,7 +11,7 @@ pipeline {
 			parallel {
 				stage('Build Docker Image') {
 					steps {
-						sh 'docker build -t docker-imagen -f docker/Dockerfile '
+						sh 'docker buildx build -t docker-imagen -f docker/Dockerfile'
 					}
 				}
 				stage('Test programm') {
@@ -37,7 +37,7 @@ pipeline {
 						}
 						stage('Coverage & Test') {
 							steps {
-								sh 'pytest --cov=app tests/'
+								sh 'coverage run -m pytest .'
 								sh 'coverage report -m'
 							}
 						}
