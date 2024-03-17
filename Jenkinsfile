@@ -37,7 +37,7 @@ pipeline {
 						}
 						stage('Coverage & Test') {
 							steps {
-								sh 'coverage run -m pytest'
+								sh 'pytest --cov=app tests/'
 								sh 'coverage report -m'
 							}
 						}
