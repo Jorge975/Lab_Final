@@ -11,7 +11,7 @@ pipeline {
 			parallel {
 				stage('Build Docker Image') {
 					steps {
-						sh 'docker build -t docker-imagen -f docker/Dockerfile .'
+						sh 'docker build -t docker-imagen -f docker/Dockerfile '
 					}
 				}
 				stage('Test programm') {
